@@ -1,0 +1,30 @@
+dataset:
+  name: pathmnist
+  n_clients: 5
+  partition: dirichlet
+  dirichlet_alpha: 0.5
+  server_ref_fraction: 0.10
+  calib_fraction: 0.15
+  seed: 42
+model:
+  name: torch_cnn
+  hidden: [64, 32]
+optim:
+  local_epochs: 1
+  local_lr: 0.01
+  batch_size: 128
+  n_rounds: 15
+attack:
+  name: no_attack
+  malicious_ratio: 0.0
+  attack_from_round: 3
+  params: {}
+defense:
+  name: fedavg
+  params: {}
+calibration:
+  calib_rounds: 5
+  fpr_target: 0.05
+  calib_seed: 1000
+seed: 42
+device: cuda

@@ -1,0 +1,36 @@
+{
+  "dataset": {
+    "name": "pneumoniamnist",
+    "n_features": 784,
+    "n_classes": 2,
+    "n_samples": 600,
+    "source": "medmnist",
+    "projected": false,
+    "full_resolution": true,
+    "model": "ConvNet28",
+    "compact_head": false
+  },
+  "n_params": 51618,
+  "he_chunks": 101,
+  "projected": false,
+  "compact_head": false,
+  "model": "ConvNet28",
+  "unruh_reps": 4,
+  "he_backend": "fused-seal-threshold",
+  "accuracies": [
+    0.7333333333333333,
+    0.7416666666666667
+  ],
+  "detected": [
+    0,
+    1
+  ],
+  "round_times": [
+    56.413951254915446,
+    51.94748221500777
+  ],
+  "msg_kb": [
+    7323.9375,
+    4882.625
+  ]
+}

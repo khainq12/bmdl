@@ -1,0 +1,13 @@
+partition,seed,n_calib_samples_used,calib_vs_server_ref,calib_vs_client_training,calib_vs_test,all_zero
+iid,42,10004,0,0,0,True
+iid,43,10004,0,0,0,True
+iid,44,10004,0,0,0,True
+dirichlet_a1.0,42,10004,0,0,0,True
+dirichlet_a1.0,43,10004,0,0,0,True
+dirichlet_a1.0,44,10004,0,0,0,True
+dirichlet_a0.5,42,10004,0,0,0,True
+dirichlet_a0.5,43,10004,0,0,0,True
+dirichlet_a0.5,44,10004,0,0,0,True
+dirichlet_a0.1,42,10004,0,0,0,True
+dirichlet_a0.1,43,10004,0,0,0,True
+dirichlet_a0.1,44,10004,0,0,0,True

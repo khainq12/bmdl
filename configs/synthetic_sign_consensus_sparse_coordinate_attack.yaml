@@ -1,0 +1,33 @@
+dataset:
+  name: synthetic
+  n_clients: 5
+  partition: dirichlet
+  dirichlet_alpha: 0.5
+  server_ref_fraction: 0.10
+  calib_fraction: 0.15
+  seed: 42
+model:
+  name: simple_mlp
+  hidden: [64, 32]
+optim:
+  local_epochs: 2
+  local_lr: 0.05
+  batch_size: 32
+  n_rounds: 10
+attack:
+  name: sparse_coordinate_attack
+  malicious_ratio: 0.2
+  attack_from_round: 3
+  params:
+    k: 20
+    selection: topk
+defense:
+  name: sign_consensus
+  params:
+    sign_topk: null
+calibration:
+  calib_rounds: 5
+  fpr_target: 0.05
+  calib_seed: 1000
+seed: 42
+device: cpu

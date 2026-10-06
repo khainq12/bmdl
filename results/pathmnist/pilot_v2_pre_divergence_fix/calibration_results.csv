@@ -1,0 +1,10 @@
+threshold,validation_fpr,validation_tpr,fpr_target,used_fallback,direction,n_honest,n_malicious,param,method,calibration_regime,defense,partition
+0.5474922293693814,0.047619047619047616,1.0,0.05,False,reject_above,21,4,tau,validation_grid_fpr_target,A_condition_specific_oracle,norm,dirichlet_a0.1
+0.06531378980835097,0.047619047619047616,1.0,0.05,False,reject_above,21,4,tau,validation_grid_fpr_target,A_condition_specific_oracle,norm,iid
+-0.5430995911449619,0.0,0.0,0.05,False,reject_below,21,4,rho,validation_grid_fpr_target,A_condition_specific_oracle,cosine,dirichlet_a0.1
+0.650607831373524,0.0,1.0,0.05,False,reject_below,21,4,rho,validation_grid_fpr_target,A_condition_specific_oracle,cosine,iid
+0.3771838855175083,0.0,0.0,0.05,False,reject_below,21,4,kappa,validation_grid_fpr_target,A_condition_specific_oracle,sign_consensus,dirichlet_a0.1
+0.5317116588516675,0.0,0.0,0.05,False,reject_below,21,4,kappa,validation_grid_fpr_target,A_condition_specific_oracle,sign_consensus,iid
+0.06531378699645635,0.047619047619047616,1.0,0.05,False,reject_above,21,4,tau,validation_grid_fpr_target,B_iid_transfer_frozen,norm,iid_reference_frozen
+0.6503801618077322,0.0,1.0,0.05,False,reject_below,21,4,rho,validation_grid_fpr_target,B_iid_transfer_frozen,cosine,iid_reference_frozen
+0.5302234686875317,0.0,0.0,0.05,False,reject_below,21,4,kappa,validation_grid_fpr_target,B_iid_transfer_frozen,sign_consensus,iid_reference_frozen

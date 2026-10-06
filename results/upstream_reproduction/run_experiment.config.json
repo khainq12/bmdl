@@ -1,0 +1,26 @@
+{
+  "script": "experiments/run_experiment.py",
+  "git_commit": "e6a6d5a2f6b85f9b51e8448001049793be0895a8",
+  "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+  "numpy": "2.2.6",
+  "scipy": "1.15.3",
+  "sklearn": "1.7.2",
+  "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+  "config_as_shipped": {
+    "n_clients": 5,
+    "n_rounds": 10,
+    "n_samples": 1000,
+    "n_features": 784,
+    "n_classes": 4,
+    "local_epochs": 3,
+    "local_lr": 0.01,
+    "batch_size": 32,
+    "dirichlet_alpha": 0.5,
+    "norm_threshold": 5.0,
+    "malicious_client_id": 3,
+    "malicious_scale": 50.0,
+    "seed": 42
+  },
+  "reproducibility_caveat": "local_training() minibatch shuffle and the malicious-delta injection in run_standard_fl/run_fl_mlkem/run_fl_hybrid/both ablations draw from the unseeded global numpy RNG (np.random.default_rng() / np.random.normal), not a seed-derived generator. Only model init, data generation, and client partitioning are actually controlled by CONFIG['seed']=42. Re-running this script will NOT reproduce bit-identical numbers; only the qualitative pattern (standard/mlkem degrade under attack from round 4, hybrid detects and stays at 100% accuracy) is expected to replicate. See docs/IMPLEMENTATION_PLAN.md Sec 3.9 and docs/UPSTREAM_SECURITY_FINDINGS.md Sec 5.7.",
+  "not_modified": "No source files under crypto/, fl_core/, experiments/, formal/ were changed to produce this run."
+}

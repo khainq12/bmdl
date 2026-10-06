@@ -1,0 +1,16 @@
+threshold,validation_fpr,validation_tpr,fpr_target,used_fallback,direction,n_honest,n_malicious,param,method,calibration_regime,defense,partition
+0.012898845238141707,0.047619047619047616,1.0,0.05,False,reject_above,21,4,tau,validation_grid_fpr_target,A_condition_specific_oracle,norm,iid
+0.061532254763599054,0.047619047619047616,1.0,0.05,False,reject_above,21,4,tau,validation_grid_fpr_target,A_condition_specific_oracle,norm,dirichlet_a1.0
+0.14939126669739136,0.047619047619047616,1.0,0.05,False,reject_above,21,4,tau,validation_grid_fpr_target,A_condition_specific_oracle,norm,dirichlet_a0.5
+0.16627703033926675,0.047619047619047616,1.0,0.05,False,reject_above,21,4,tau,validation_grid_fpr_target,A_condition_specific_oracle,norm,dirichlet_a0.1
+0.8691060332964861,0.0,1.0,0.05,False,reject_below,21,4,rho,validation_grid_fpr_target,A_condition_specific_oracle,cosine,iid
+-0.19257311127255258,0.0,0.0,0.05,False,reject_below,21,4,rho,validation_grid_fpr_target,A_condition_specific_oracle,cosine,dirichlet_a1.0
+-0.5062761484545466,0.0,0.0,0.05,False,reject_below,21,4,rho,validation_grid_fpr_target,A_condition_specific_oracle,cosine,dirichlet_a0.5
+-0.5522555342690941,0.0,0.0,0.05,False,reject_below,21,4,rho,validation_grid_fpr_target,A_condition_specific_oracle,cosine,dirichlet_a0.1
+0.5654281338745409,0.0,0.0,0.05,False,reject_below,21,4,kappa,validation_grid_fpr_target,A_condition_specific_oracle,sign_consensus,iid
+0.421309834164329,0.0,0.0,0.05,False,reject_below,21,4,kappa,validation_grid_fpr_target,A_condition_specific_oracle,sign_consensus,dirichlet_a1.0
+0.4046198996497207,0.0,0.0,0.05,False,reject_below,21,4,kappa,validation_grid_fpr_target,A_condition_specific_oracle,sign_consensus,dirichlet_a0.5
+0.3693225415212495,0.0,0.0,0.05,False,reject_below,21,4,kappa,validation_grid_fpr_target,A_condition_specific_oracle,sign_consensus,dirichlet_a0.1
+0.012898845250272921,0.047619047619047616,1.0,0.05,False,reject_above,21,4,tau,validation_grid_fpr_target,B_iid_transfer_frozen,norm,iid_reference_frozen
+0.8690693731871779,0.0,1.0,0.05,False,reject_below,21,4,rho,validation_grid_fpr_target,B_iid_transfer_frozen,cosine,iid_reference_frozen
+0.5656118467693558,0.0,0.0,0.05,False,reject_below,21,4,kappa,validation_grid_fpr_target,B_iid_transfer_frozen,sign_consensus,iid_reference_frozen
