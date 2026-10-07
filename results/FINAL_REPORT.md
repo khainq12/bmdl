@@ -34,8 +34,9 @@ was **completely blind** to the same class of attack on Fed-ISIC2019's
 real natural federation (TPR 0.000), while Sign Consensus — whose
 contribution could not be shown to be necessary anywhere in the PathMNIST
 study — became the operative directional defense there (TPR 1.000).
-Combining multiple signal types let `C4-DA v1` maintain full attack
-coverage across both datasets despite this role swap underneath it, at
+Combining multiple signal types let `C4-DA v1` maintain coverage against
+the tested harmful attack classes across both datasets despite this role
+swap underneath it, at
 the cost of a real, measured increase in honest-client false rejections
 on the natural federation. Both the success (coverage held) and the cost
 (FPR rose) are reported without rebalancing the narrative toward either
@@ -228,8 +229,9 @@ result was seen.
 - `large_norm` catastrophic safety: FedAvg diverges in 2/2 seeds (accuracy
   collapses to 0.183, closely matching the PathMNIST-scale collapse);
   `C4-DA v1`, Norm, and Multi-Krum stay completely safe in 2/2 seeds each.
-- Clean (no-attack) utility: `C4-DA v1` (0.470) is statistically
-  indistinguishable from FedAvg (0.472), Norm (0.479), Multi-Krum (0.475).
+- Clean (no-attack) utility: `C4-DA v1` achieved similar clean utility in
+  the two-seed evaluation (0.470), compared with FedAvg (0.472), Norm
+  (0.479), and Multi-Krum (0.475).
 
 **What did not generalize, reported with the same rigor as the positive
 result:**
@@ -264,6 +266,19 @@ FPR: 0.236 vs. 0.125 — same direction, no collapse, no flip). A third seed
 was not run, per the pre-agreed stop rule (2 seeds consistent → stop;
 only extend on collapse or qualitative disagreement).
 
+**Cross-dataset summary.** The table below condenses this section's
+findings into the single comparison that carries this project's core
+cross-dataset contribution:
+
+| Property | PathMNIST | Fed-ISIC2019 |
+|---|---|---|
+| Norm → large-norm | Strong | Strong |
+| Cosine → directional | Strong | Failed |
+| Sign unique contribution | Not demonstrated | Demonstrated |
+| C4-DA catastrophic safety | Preserved | Preserved |
+| C4-DA honest FPR | Low after adaptation | Higher / variable |
+| Clean utility | Preserved | Preserved |
+
 ---
 
 ## 7. Core contribution and research insight
@@ -279,8 +294,9 @@ The strongest, most defensible conclusion this project supports is **not**
 > in ways neither this project nor, as far as these experiments show, the
 > broader literature's single-signal framings fully anticipate. A layered
 > design that combines magnitude and (multiple) directional evidence types
-> maintained full attack coverage across two structurally different
-> datasets *despite* this underlying role change — but that resilience
+> maintained catastrophic-magnitude and directional/sparse attack coverage
+> across the evaluated settings on two structurally different datasets
+> *despite* this underlying role change — but that resilience
 > was not free: it came with measurably higher honest-client false
 > rejections on the natural federation than any single signal alone would
 > have produced there.
@@ -332,9 +348,9 @@ here — restated once, completely, in one place:
 6. **`C4-DA v1`'s honest-FPR increase on the natural federation is a
    measured cost, not a resolved one.** No Fed-ISIC2019-specific ablation
    was run to confirm Sign's peer-rank mechanism is the sole or even
-   primary cause (Sign is the prime suspect, by elimination and mechanism
-   overlap with the directional-detection finding — not proven by a
-   dedicated test).
+   primary cause. The Sign peer-rank mechanism is a plausible contributor,
+   supported by mechanism overlap with the directional-detection behavior,
+   but this was not isolated experimentally.
 7. **Upstream ZKFL-PQ's cryptographic weaknesses (§3) are independent of
    this project's gradient-attestation contribution** and must not be
    conflated — `C4-DA v1` is a plain (non-cryptographic) gradient defense,
@@ -423,8 +439,9 @@ insufficient, to designing, locking, and validating a layered Combined
 Gradient Attestation mechanism on two structurally different datasets —
 one controlled (PathMNIST), one a real multi-hospital natural federation
 (Fed-ISIC2019). The resulting evidence supports a specific, bounded claim:
-`C4-DA v1` reliably prevents the catastrophic failure mode of unbounded
--magnitude attacks across both datasets and both scales tested, maintains
+`C4-DA v1` prevented the catastrophic failure mode of the tested
+unbounded-magnitude attack in all evaluated PathMNIST and Fed-ISIC2019
+runs, maintains
 clean-data utility competitive with the strongest existing robust
 aggregator, and preserves directional-attack coverage across a real
 distribution shift that caused its best single alternative signal to fail
