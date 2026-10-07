@@ -251,11 +251,12 @@ result:**
   conditions, `C4-DA v1`'s honest FPR (0.115–0.238) is 2.5–5x *higher*
   than standalone Norm's (0.042–0.046, remarkably stable across every
   condition — the drift-aware magnitude gate itself continues to work
-  well). Sign's peer-rank mechanism is the prime suspect for the
-  additional false rejections (the same mechanism that successfully
-  catches `directional_poisoning` above) — but this is **inferred, not
-  proven**: no dedicated Fed-ISIC2019 ablation was run to confirm Sign is
-  the sole cause, and that causal claim is not made more strongly than
+  well). The Sign peer-rank mechanism is a plausible contributor to the
+  additional false rejections, supported by mechanism overlap with the
+  directional-detection behavior above (the same mechanism that
+  successfully catches `directional_poisoning`) — but this is **inferred,
+  not proven**: no dedicated Fed-ISIC2019 ablation was run to isolate
+  Sign as the cause, and that causal claim is not made more strongly than
   the evidence supports.
 
 **Seed scope**: 2 seeds (not PathMNIST's eventual 8), a deliberate,
@@ -359,7 +360,7 @@ here — restated once, completely, in one place:
    aggregation are already mutually exclusive in the upstream code),
    not a cryptographic fix for anything in §3.
 8. **No claim that `C4-DA v1` outperforms Multi-Krum is supported by this
-   data.** Their final accuracies are statistically close on both datasets
+   data.** Their observed final accuracies are close on both datasets
    (PathMNIST: 0.381 vs. 0.386; the two were not compared head-to-head on
    Fed-ISIC2019's attack conditions beyond the shared matrix already
    reported). The differentiating value, where it exists, is
