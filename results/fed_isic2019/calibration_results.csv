@@ -1,0 +1,4 @@
+threshold,validation_fpr,validation_tpr,fpr_target,used_fallback,direction,n_honest,n_malicious,param,method,defense,calibration_regime
+0.25812102845051405,0.038461538461538464,1.0,0.05,False,reject_above,26,4,tau,validation_grid_fpr_target,norm,natural_federation_single_condition
+-0.3927854396970209,0.0,0.0,0.05,False,reject_below,26,4,rho,validation_grid_fpr_target,cosine,natural_federation_single_condition
+0.7236905515239221,0.0,1.0,0.05,False,reject_below,26,4,kappa,validation_grid_fpr_target,sign_consensus,natural_federation_single_condition

@@ -631,3 +631,99 @@ diverged row forward for all remaining rounds, each flagged
 compute, and `diverged` lets the aggregation step treat "the model was
 destroyed" as its own reportable category rather than silently averaging
 huge-loss rows into a utility number.
+
+### Addendum 2026-10-07 (j) — Fed-ISIC2019 data-role mapping, model, and
+training primitive (locked before implementation; `C4-DA v1`, i.e.
+`benchmark/defenses/combined.py::C4DriftAware`, is used completely
+unmodified in this and every subsequent Fed-ISIC2019 addendum — per
+`results/LOCKED_DESIGN_C4-DA-v1.md`)
+
+**Environment.** `owkin/FLamby` cloned to `/home/ubuntu/Desktop/FLamby`
+(sibling to this repo, not vendored inside it); only the `isic2019` pip
+extra installed (`pip install -e ".[isic2019]"` — not `all_extra`, which
+would pull in unrelated datasets' heavy/irrelevant dependencies).
+`albumentations` pinned to `1.3.1` (the version FLamby's `dataset.py`/
+`model.py` were written against — the latest `2.0.8` renamed/removed
+`Flip` and changed several transform signatures, breaking import). Dataset
+downloaded and preprocessed by the user directly via FLamby's own scripts
+(license-acceptance gate; Claude does not and must not answer that
+prompt) — confirmed via `dataset_location.yaml`:
+`download_complete: true`, `preprocessing_complete: true`. 23,247 images
+across 6 natural centers (BCN=9930/2483 train/test,
+HAM_vidir_molemax=3163/791, HAM_vidir_modern=2691/672,
+HAM_rosendahl=1807/452, MSK=655/164, HAM_vienna_dias=351/88 — exact match
+to FLamby's own published counts, verified by loading
+`FedIsic2019(center=c, ...)` for all 6 centers before writing any new
+code).
+
+**Data-role mapping** (extends §1/§3's general four-way-split rule to
+Fed-ISIC2019's disk-backed, variable-aspect-ratio images):
+
+| General role (§3) | Fed-ISIC2019 mapping |
+|---|---|
+| Server trusted reference (server_ref_fraction=0.10) | Carved from center 0 (BCN, the largest center — fixed, pre-declared, matches §3's already-locked Fed-ISIC2019 exception verbatim) training indices only. The remaining 90% of center 0 stays in FL training as center 0's client data. |
+| Calibration/validation subset (calib_fraction=0.15) | **New rule, this addendum** (§3 only locked the server-ref exception, not calibration, for Fed-ISIC2019): since FLamby ships no official val split (only train/test, unlike PathMNIST's MedMNIST train/val/test), 15% is carved from **each of the 6 centers' own remaining (post-server-ref) training indices**, proportionally — preserving relative center-size ratios in the pooled calibration set, consistent with this benchmark's natural-federation spirit rather than flattening centers into one IID pool. The six per-center calibration slices are pooled into one calibration set for `calibrate_tau`/`calibrate_rho`/`calibrate_kappa` (unchanged functions, reused — see §8), exactly mirroring how PathMNIST's val-split calibration pool fed the same three functions. |
+| Client training partitions | Each center's remaining training indices (after server-ref and calibration carve-outs) = that center's client data, **used verbatim, no re-partitioning** — this is the entire point of Fed-ISIC2019's role (§1: natural-client validation). No Dirichlet/IID partition sweep — natural centers are already the one condition under test. |
+| Official test split | FLamby's **pooled** test set (`FedIsic2019(train=False, pooled=True)`, 4,650 images across all 6 centers) — mirrors PathMNIST's single pooled official test split as the one held-out accuracy/loss reporting set, not six fragmented per-center test sets. |
+
+All four subsets' pairwise disjointness is asserted in code
+(`benchmark/datasets/fed_isic2019.py::assert_disjoint`), mirroring
+PathMNIST's `assert_four_way_disjoint` — index-set algebra per center plus
+a content check, not assumed from the carve-out arithmetic alone.
+
+**Model.** FLamby's own `Baseline` (EfficientNet-b0, ImageNet-pretrained,
+final FC replaced with `Linear(1280, 8)`) — reused verbatim via
+`benchmark/models/torch_image_model.py::FedIsicModel`, a flat-vector
+adapter exposing the identical `get_weights`/`set_weights`/`n_params`
+contract as `TorchCNNFlat` (so every defense, including `C4DriftAware`,
+is unaffected by the model swap — defenses only ever see flat delta
+vectors). **Not** a new architecture invented for this benchmark — the
+locked design principle ("use the dataset's own established baseline,
+don't introduce new confounds") extends from "use FLamby's own natural
+centers" to "use FLamby's own natural model" for the same reason.
+4,017,796 parameters (vs. PathMNIST's much smaller `PathMNISTCNN`).
+
+**Training primitive.** `benchmark/models/local_training_image.py::
+local_training_fixed_steps_image` — same locked fixed-K
+shuffle-and-cycle-on-exhaustion sampling rule as
+`local_training_fixed_steps` (Addendum (g)), generalized from in-memory
+`(X, y)` arrays to an index list into a torch `Dataset`, because
+Fed-ISIC2019 images are decoded and cropped per-item from disk (FLamby's
+preprocessing conserves aspect ratio, so images cannot be stored in one
+fixed-shape array — confirmed by inspecting `resize_images.py`) rather
+than loaded wholesale into RAM (also impractical at this machine's 15GB
+total RAM for 23k variable-size images). Driven by the same single
+explicit `rng` stream per client per round — no separate DataLoader
+-internal RNG, preserving the project-wide single-stream-determinism
+convention.
+
+**Round budget / K-steps — explicitly NOT copied from PathMNIST.**
+Measured directly on this hardware before choosing any number: one
+EfficientNet-b0 SGD step at batch_size=32 takes **~230ms** (GPU, 20
+measured steps, center 5 — the smallest), vs. PathMNIST's small CNN at
+roughly ~7ms/step — a **~33x** per-step slowdown. Per ChatGPT's own
+explicit guidance when this stage was authorized: "what is locked is the
+algorithm/calibration *procedure*, not the literal PathMNIST numbers" —
+this applies equally to K/round-count, not only to τ/ρ/κ. PathMNIST's
+K=50-steps/25-rounds protocol is **not** reused as-is; a fresh
+round-budget-style sizing study (same method as
+`scripts/pathmnist_round_budget_study.py` — clean FedAvg only, no
+attacks, no calibration) is run on Fed-ISIC2019's own natural centers
+before any defense/attack benchmarking, and its result is locked in a
+follow-up addendum once complete, exactly mirroring how PathMNIST's own
+N_ROUNDS=25 was derived empirically rather than assumed (Addendum (h)).
+
+**Round-budget result (locked):** `scripts/fedisic_round_budget_study.py`
+(3 seeds, clean FedAvg, K=10, out to 15 rounds — full curve and rationale
+in `results/fed_isic2019/round_budget_study/SELECTION.md`) found
+convergence far faster and cleaner than PathMNIST's (pretrained features,
+not training from scratch): mean pooled-test accuracy plateaus from round
+~10 onward (0.471→0.476 across rounds 10–14, a +0.5pp total move), with
+cross-seed std at its minimum (0.002) at round 12. **N_ROUNDS=12,
+ATTACK_FROM_ROUND=5** (model already at ≈94% of its eventual accuracy by
+round 5 — post-initial-learning, matching PathMNIST's own attack-timing
+principle). Measured cost: **~38.5s/round** (6 clients × K=10, clean
+FedAvg) — **~18x** PathMNIST's ~2.1s/round — meaning the main Fed-ISIC2019
+benchmark's defense x attack x seed matrix must be scoped far more tightly
+than PathMNIST's; this is flagged for cross-check before any specific
+matrix is committed to, not decided unilaterally here.

@@ -19,6 +19,7 @@ class DefenseResult:
     scores: Optional[np.ndarray]  # per-client score; None if not a detector
     accepted: Optional[np.ndarray]  # boolean mask; None if not a detector
     is_detector: bool
+    extra: Optional[Dict[str, Any]] = None  # richer per-signal diagnostics (Combined defenses only)
 
 
 class Defense:

@@ -1,0 +1,4 @@
+candidate,large_norm_runs,runs_with_ge1_accept,p_diverge_given_ge1_accept,runs_with_0_accept,p_diverge_given_0_accept
+c3_static,12,0,,12,0.0
+c4_drift_aware,12,0,,12,0.0
+c4_static,12,0,,12,0.0

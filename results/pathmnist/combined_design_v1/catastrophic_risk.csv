@@ -1,0 +1,8 @@
+candidate,large_norm_accepted,large_norm_total,catastrophic_risk_flag,directional_fn_total,directional_total,directional_fn_rate,max_consecutive_directional_accepts,sparse_fn_total,sparse_total,sparse_fn_rate
+C0,0,180,False,18,360,0.05,1,0,180,0.0
+C1,135,180,True,95,360,0.2638888888888889,11,0,180,0.0
+C2,0,180,False,18,360,0.05,1,0,180,0.0
+C3,0,180,False,95,360,0.2638888888888889,11,0,180,0.0
+C4,0,180,False,18,360,0.05,1,0,180,0.0
+C5,180,180,True,276,360,0.7666666666666667,15,0,180,0.0
+C6,0,180,False,136,360,0.37777777777777777,15,0,180,0.0
