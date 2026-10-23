@@ -1,0 +1,10 @@
+{
+  "run_id": "multi_krum__iid__seed42",
+  "converged_round": null,
+  "selected_round": 499,
+  "final_val_accuracy": 0.8039783835411072,
+  "final_val_loss": 0.543444812297821,
+  "test_accuracy_at_final_checkpoint": 0.8030641078948975,
+  "test_loss_at_final_checkpoint": 0.6628395318984985,
+  "total_rounds_run": 500
+}

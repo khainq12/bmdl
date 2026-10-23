@@ -1,0 +1,8 @@
+defense,sum,mean,count
+c4_drift_aware,0,0.0,72
+cosine,17,0.236,72
+fedavg,24,0.333,72
+median,0,0.0,72
+multi_krum,0,0.0,72
+norm,1,0.014,72
+sign_consensus,14,0.194,72

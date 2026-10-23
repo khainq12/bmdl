@@ -1,0 +1,10 @@
+{
+  "run_id": "multi_krum__dirichlet_a0.5__seed42",
+  "converged_round": null,
+  "selected_round": 499,
+  "final_val_accuracy": 0.7283086776733398,
+  "final_val_loss": 0.728052020072937,
+  "test_accuracy_at_final_checkpoint": 0.7048746943473816,
+  "test_loss_at_final_checkpoint": 0.8392729163169861,
+  "total_rounds_run": 500
+}

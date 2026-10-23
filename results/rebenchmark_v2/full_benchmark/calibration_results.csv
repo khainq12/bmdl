@@ -1,0 +1,13 @@
+threshold,validation_fpr,validation_tpr,fpr_target,used_fallback,direction,n_honest,n_malicious,param,method,key,defense,partition
+0.06531215510977983,0.047619047619047616,1.0,0.05,False,reject_above,21,4,tau,validation_grid_fpr_target,norm__iid,norm,iid
+0.6498839760422587,0.0,1.0,0.05,False,reject_below,21,4,rho,validation_grid_fpr_target,cosine__iid,cosine,iid
+0.5312284016607414,0.0,0.0,0.05,False,reject_below,21,4,kappa,validation_grid_fpr_target,sign_consensus__iid,sign_consensus,iid
+0.3041974059181698,0.047619047619047616,1.0,0.05,False,reject_above,21,4,tau,validation_grid_fpr_target,norm__dirichlet_a1.0,norm,dirichlet_a1.0
+-0.5121395851484962,0.0,0.0,0.05,False,reject_below,21,4,rho,validation_grid_fpr_target,cosine__dirichlet_a1.0,cosine,dirichlet_a1.0
+0.41682531362649644,0.0,0.0,0.05,False,reject_below,21,4,kappa,validation_grid_fpr_target,sign_consensus__dirichlet_a1.0,sign_consensus,dirichlet_a1.0
+0.38974330390681633,0.047619047619047616,1.0,0.05,False,reject_above,21,4,tau,validation_grid_fpr_target,norm__dirichlet_a0.5,norm,dirichlet_a0.5
+-0.4416071590832835,0.0,0.0,0.05,False,reject_below,21,4,rho,validation_grid_fpr_target,cosine__dirichlet_a0.5,cosine,dirichlet_a0.5
+0.39934580883856136,0.0,0.0,0.05,False,reject_below,21,4,kappa,validation_grid_fpr_target,sign_consensus__dirichlet_a0.5,sign_consensus,dirichlet_a0.5
+0.5472597877692599,0.047619047619047616,1.0,0.05,False,reject_above,21,4,tau,validation_grid_fpr_target,norm__dirichlet_a0.1,norm,dirichlet_a0.1
+-0.5434035006242735,0.0,0.0,0.05,False,reject_below,21,4,rho,validation_grid_fpr_target,cosine__dirichlet_a0.1,cosine,dirichlet_a0.1
+0.3770392599389896,0.0,0.0,0.05,False,reject_below,21,4,kappa,validation_grid_fpr_target,sign_consensus__dirichlet_a0.1,sign_consensus,dirichlet_a0.1

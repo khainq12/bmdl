@@ -1,0 +1,69 @@
+{
+  "completeness": {
+    "expected_combos": 504,
+    "manifest_rows": 504,
+    "unique_run_ids": 504,
+    "missing": [],
+    "extra": [],
+    "duplicate_run_ids": 0,
+    "per_round_rows": 141120,
+    "per_round_rows_expected": 141120,
+    "client_decision_rows": 705600,
+    "client_decision_rows_expected": 705600,
+    "runs_with_wrong_round_count": 0,
+    "combos_with_wrong_seed_count": 0
+  },
+  "nan_audit": {
+    "na_counts": {
+      "final_accuracy": 0,
+      "final_loss": 0,
+      "runtime_s": 0,
+      "tp": 216,
+      "fp": 216,
+      "tn": 216,
+      "fn": 216,
+      "tpr": 216,
+      "fpr": 216
+    },
+    "detector_rows_with_nan_tpr": 0,
+    "nondetector_rows_with_non_nan_tpr": 0
+  },
+  "tpr_fpr_recompute_audit": {
+    "n_checked": 288,
+    "n_mismatches": 0,
+    "examples": []
+  },
+  "divergence_audit": {
+    "total_diverged": 56,
+    "total_runs": 504,
+    "flatline_violations": [],
+    "threshold_violations": []
+  },
+  "paired_c4_vs_multikrum": {
+    "n": 72,
+    "c4_better": 23,
+    "multi_krum_better": 49,
+    "mean_diff": -0.02243693545460701,
+    "std_diff": 0.04960251291281108
+  },
+  "freeze_audit": {
+    "total_detector_runs": 288,
+    "frozen_last30_count": 21,
+    "freeze_diverge_crosstab": {
+      "false": {
+        "false": 235,
+        "true": 21
+      },
+      "true": {
+        "false": 32,
+        "true": 0
+      }
+    }
+  },
+  "ablation_integrity": {
+    "expected_combos": 54,
+    "actual_rows": 54,
+    "missing": 0,
+    "crosscheck_max_abs_diff": 0.0001392662525177002
+  }
+}

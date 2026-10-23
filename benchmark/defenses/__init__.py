@@ -9,9 +9,17 @@ unmodified in results/pathmnist/benchmark_v2_corrected/."""
 from __future__ import annotations
 
 from .base import Defense, DefenseResult
-from .combined import C3Static, C4DriftAware, C4DriftAwareNoCosine, C4DriftAwareNoNorm, C4DriftAwareNoSign, C4Static
+from .combined import (
+    AdaptiveNormOnly,
+    C3Static,
+    C4DriftAware,
+    C4DriftAwareNoCosine,
+    C4DriftAwareNoNorm,
+    C4DriftAwareNoSign,
+    C4Static,
+)
 from .cosine import CosineFilter
-from .fedavg import FedAvg
+from .fedavg import FedAvg, FedAvgWeighted
 from .krum import MultiKrum
 from .median import CoordMedian
 from .norm import NormFilter
@@ -19,6 +27,7 @@ from .sign_consensus import SignConsensus
 
 DEFENSES = {
     "fedavg": FedAvg,
+    "fedavg_weighted": FedAvgWeighted,
     "norm": NormFilter,
     "cosine": CosineFilter,
     "sign_consensus": SignConsensus,
@@ -30,11 +39,13 @@ DEFENSES = {
     "c4_drift_aware_no_norm": C4DriftAwareNoNorm,
     "c4_drift_aware_no_cosine": C4DriftAwareNoCosine,
     "c4_drift_aware_no_sign": C4DriftAwareNoSign,
+    "adaptive_norm_only": AdaptiveNormOnly,
 }
 
 DETECTOR_DEFENSES = {
     "norm", "cosine", "sign_consensus", "c3_static", "c4_static", "c4_drift_aware",
     "c4_drift_aware_no_norm", "c4_drift_aware_no_cosine", "c4_drift_aware_no_sign",
+    "adaptive_norm_only",
 }
 
 

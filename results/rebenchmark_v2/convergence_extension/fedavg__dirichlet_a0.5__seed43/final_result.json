@@ -1,0 +1,10 @@
+{
+  "run_id": "fedavg__dirichlet_a0.5__seed43",
+  "converged_round": 477,
+  "selected_round": 477,
+  "final_val_accuracy": 0.7753898501396179,
+  "final_val_loss": 0.6187970042228699,
+  "test_accuracy_at_final_checkpoint": 0.7232590913772583,
+  "test_loss_at_final_checkpoint": 0.8588215708732605,
+  "total_rounds_run": 500
+}

@@ -14,6 +14,24 @@ results.
 benchmark/defenses/combined.py is NOT modified by this script or as a
 result of anything it produces.
 
+EXTENSION (added after the original 34-run matrix was locked and reported;
+script is resume-safe so the original 34 combos are untouched/skipped):
+  - low_norm and full_sign_flip attacks, each x MAIN_DEFENSES x SEEDS
+    (8+8=16 runs) -- brings these two attacks to the same per-attack
+    coverage depth (4 defenses x 2 seeds) that large_norm and
+    sparse_coordinate_attack already had, closing the "chưa chạy" gap.
+  - a 3rd seed (44), added ONLY to {norm, c4_drift_aware} x the original 4
+    CONDITIONS (8 runs), plus cosine x directional_poisoning (1 run) --
+    targeted at the two specific findings that rested on only 2 seeds and
+    showed the most seed-to-seed spread in the original report (C4-DA v1's
+    honest-FPR instability at no_attack: 0.236 vs 0.125; Cosine's
+    directional_poisoning TPR=0.000 role-reversal, the report's headline
+    cross-dataset claim). fedavg/multi_krum are NOT given a 3rd seed here:
+    their accuracy numbers were already stable across the original 2 seeds
+    and they are not detector defenses (no TPR/FPR), so a 3rd seed would
+    not add evidence to any claim currently resting on thin data. This is
+    a deliberate, scoped choice, not a full seed-3 sweep of the matrix.
+
 Usage: python scripts/fedisic_benchmark.py
 """
 
@@ -172,6 +190,28 @@ def main() -> None:
             for defense_name in MAIN_DEFENSES:
                 combos.append((seed, attack, defense_name))
         combos.append((seed, COSINE_ONLY_CONDITION, "cosine"))
+
+    # EXTENSION -- see module docstring for the justification of exactly
+    # which combos were added and why.
+    EXTRA_ATTACKS = ["low_norm", "full_sign_flip"]
+    for seed in SEEDS:
+        for attack in EXTRA_ATTACKS:
+            for defense_name in MAIN_DEFENSES:
+                combos.append((seed, attack, defense_name))
+
+    EXTRA_SEED = 44
+    for attack in CONDITIONS:
+        for defense_name in ["norm", "c4_drift_aware"]:
+            combos.append((EXTRA_SEED, attack, defense_name))
+    combos.append((EXTRA_SEED, COSINE_ONLY_CONDITION, "cosine"))
+
+    # EXTENSION 2 -- sign_consensus x directional_poisoning, same 3 seeds as
+    # the cosine-only extra run above, so the two single-signal directional
+    # baselines (Cosine, Sign) have matched depth. Fills the "chưa thử" gap
+    # in Hình 4.19/the directional-TPR cross-dataset comparison.
+    for seed in SEEDS + [EXTRA_SEED]:
+        combos.append((seed, COSINE_ONLY_CONDITION, "sign_consensus"))
+
     print(f"Total planned runs: {len(combos)}")
 
     reuse_ids = set()

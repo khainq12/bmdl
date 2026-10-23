@@ -1,0 +1,7 @@
+attack,sum,mean,count
+directional_poisoning,1,0.012,84
+full_sign_flip,5,0.06,84
+large_norm,33,0.393,84
+low_norm,0,0.0,84
+no_attack,0,0.0,84
+sparse_coordinate_attack,17,0.202,84

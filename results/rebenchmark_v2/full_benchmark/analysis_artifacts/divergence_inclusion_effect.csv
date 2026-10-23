@@ -1,0 +1,8 @@
+defense,acc_incl_diverged,acc_excl_diverged,n_diverged
+c4_drift_aware,0.667,0.667,0
+cosine,0.536,0.664,17
+fedavg,0.454,0.628,24
+median,0.652,0.652,0
+multi_krum,0.69,0.69,0
+norm,0.555,0.562,1
+sign_consensus,0.555,0.67,14

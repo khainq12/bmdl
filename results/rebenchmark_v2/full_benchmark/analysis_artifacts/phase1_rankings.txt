@@ -1,0 +1,6 @@
+round 150: ['fedavg', 'sign_consensus', 'cosine', 'median', 'multi_krum', 'c4_drift_aware', 'norm']
+round 200: ['fedavg', 'sign_consensus', 'cosine', 'median', 'c4_drift_aware', 'multi_krum', 'norm']
+round 240: ['fedavg', 'sign_consensus', 'median', 'cosine', 'multi_krum', 'c4_drift_aware', 'norm']
+round 280: ['fedavg', 'sign_consensus', 'cosine', 'median', 'multi_krum', 'c4_drift_aware', 'norm']
+
+Spearman rho(150,280)=1.000 p=0.000

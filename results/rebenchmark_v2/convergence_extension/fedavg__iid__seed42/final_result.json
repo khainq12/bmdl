@@ -1,0 +1,10 @@
+{
+  "run_id": "fedavg__iid__seed42",
+  "converged_round": null,
+  "selected_round": 499,
+  "final_val_accuracy": 0.8062775135040283,
+  "final_val_loss": 0.5455451607704163,
+  "test_accuracy_at_final_checkpoint": 0.7955431938171387,
+  "test_loss_at_final_checkpoint": 0.6775567531585693,
+  "total_rounds_run": 500
+}

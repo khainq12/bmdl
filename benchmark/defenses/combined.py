@@ -177,6 +177,40 @@ class C4DriftAware(Defense):
         return DefenseResult(update=update, scores=norm_scores, accepted=accepted, is_detector=True, extra=extra)
 
 
+class AdaptiveNormOnly(Defense):
+    """R12 ablation: isolates C4-DA v1's drift-aware magnitude gate as a
+    standalone defense -- EXACTLY the same `_drift_tau` calculation C4-DA
+    uses for its Norm stage (current-round median + 3.5x1.4826x MAD,
+    falling back to the static tau when MAD==0), but with no Cosine, no
+    Sign, no peer-outlier term at all. Exists to separate "does threshold
+    ADAPTATION fix the static-Norm freezing problem" from "does MULTI-SIGNAL
+    FUSION (adding Cosine/Sign) add anything beyond that" -- the original
+    static NormFilter (benchmark/defenses/norm.py) and C4DriftAware already
+    give the two endpoints; this is the missing middle point."""
+
+    name = "adaptive_norm_only"
+
+    def aggregate(self, deltas: List[np.ndarray], ctx: Dict[str, Any]) -> DefenseResult:
+        static_tau = ctx["tau"]
+        if static_tau is None:
+            raise ValueError("AdaptiveNormOnly requires ctx['tau'] (static fallback)")
+
+        norm_scores = np.array([float(np.linalg.norm(d)) for d in deltas])
+        tau_drift = _drift_tau(norm_scores, static_tau)
+        norm_fail = norm_scores > tau_drift
+        accepted = ~norm_fail
+        update = _aggregate_from_accept(deltas, accepted)
+
+        extra = {
+            "norm_score": norm_scores, "norm_fail": norm_fail,
+            "tau_used": np.full(len(deltas), tau_drift, dtype=float),
+            "tau_static_fallback": np.full(len(deltas), static_tau, dtype=float),
+            "median_norm": np.full(len(deltas), float(np.median(norm_scores)), dtype=float),
+            "mad_norm": np.full(len(deltas), float(np.median(np.abs(norm_scores - np.median(norm_scores)))), dtype=float),
+        }
+        return DefenseResult(update=update, scores=norm_scores, accepted=accepted, is_detector=True, extra=extra)
+
+
 class C4DriftAwareNoNorm(Defense):
     """End-to-end ablation of locked C4-DA v1: magnitude safety gate
     removed entirely (no norm_fail term at all -- not masked post-hoc,

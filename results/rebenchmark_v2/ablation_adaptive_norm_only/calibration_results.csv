@@ -1,0 +1,7 @@
+threshold,validation_fpr,validation_tpr,fpr_target,used_fallback,direction,n_honest,n_malicious,param,method,key,defense,partition
+0.06531379560432173,0.047619047619047616,1.0,0.05,False,reject_above,21,4,tau,validation_grid_fpr_target,norm__iid,norm,iid
+0.6499158388250001,0.0,1.0,0.05,False,reject_below,21,4,rho,validation_grid_fpr_target,cosine__iid,cosine,iid
+0.5311427804242539,0.0,0.0,0.05,False,reject_below,21,4,kappa,validation_grid_fpr_target,sign_consensus__iid,sign_consensus,iid
+0.38971455122181203,0.047619047619047616,1.0,0.05,False,reject_above,21,4,tau,validation_grid_fpr_target,norm__dirichlet_a0.5,norm,dirichlet_a0.5
+-0.4400218351335953,0.0,0.0,0.05,False,reject_below,21,4,rho,validation_grid_fpr_target,cosine__dirichlet_a0.5,cosine,dirichlet_a0.5
+0.4001505994055812,0.0,0.0,0.05,False,reject_below,21,4,kappa,validation_grid_fpr_target,sign_consensus__dirichlet_a0.5,sign_consensus,dirichlet_a0.5

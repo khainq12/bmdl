@@ -1,0 +1,10 @@
+{
+  "run_id": "c4_drift_aware__iid__seed42",
+  "converged_round": 198,
+  "selected_round": 198,
+  "final_val_accuracy": 0.6584365963935852,
+  "final_val_loss": 0.9492031335830688,
+  "test_accuracy_at_final_checkpoint": 0.6922006011009216,
+  "test_loss_at_final_checkpoint": 0.9628422260284424,
+  "total_rounds_run": 500
+}

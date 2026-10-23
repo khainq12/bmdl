@@ -1,0 +1,5 @@
+partition,sum,mean,count
+dirichlet_a0.1,20,0.159,126
+dirichlet_a0.5,15,0.119,126
+dirichlet_a1.0,13,0.103,126
+iid,8,0.063,126

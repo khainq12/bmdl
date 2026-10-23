@@ -1,0 +1,10 @@
+{
+  "run_id": "c4_drift_aware__dirichlet_a0.5__seed44",
+  "converged_round": 462,
+  "selected_round": 462,
+  "final_val_accuracy": 0.7714914083480835,
+  "final_val_loss": 0.6305128931999207,
+  "test_accuracy_at_final_checkpoint": 0.7614206075668335,
+  "test_loss_at_final_checkpoint": 0.6982002854347229,
+  "total_rounds_run": 500
+}
